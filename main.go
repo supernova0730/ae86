@@ -1,0 +1,26 @@
+package main
+
+import (
+	"ae86/pkg/banner"
+	"runtime"
+	"time"
+)
+
+const bannerTemplate = `
+{{ .ansiColor.Red }}  █████╗ ███████╗ █████╗  ██████╗  {{ .ansiColor.Green }} Now:      {{ .ansiColor.Blue }} {{ .now }}
+{{ .ansiColor.Red }} ██╔══██╗██╔════╝██╔══██╗██╔════╝  {{ .ansiColor.Green }} NumCPU:   {{ .ansiColor.Blue }} {{ .numCPU }}
+{{ .ansiColor.Red }} ███████║█████╗  ╚█████╔╝███████╗  {{ .ansiColor.Green }} GOOS:     {{ .ansiColor.Blue }} {{ .GOOS }}
+{{ .ansiColor.Red }} ██╔══██║██╔══╝  ██╔══██╗██╔═══██╗ {{ .ansiColor.Green }} GOARCH:   {{ .ansiColor.Blue }} {{ .GOARCH }}
+{{ .ansiColor.Red }} ██║  ██║███████╗╚█████╔╝╚██████╔╝ {{ .ansiColor.Green }} Compiler: {{ .ansiColor.Blue }} {{ .Compiler }}
+{{ .ansiColor.Red }} ╚═╝  ╚═╝╚══════╝ ╚════╝  ╚═════╝ 
+`
+
+func main() {
+	banner.Default(bannerTemplate, map[string]interface{}{
+		"now":      time.Now().Format(time.ANSIC),
+		"numCPU":   runtime.NumCPU(),
+		"GOOS":     runtime.GOOS,
+		"GOARCH":   runtime.GOARCH,
+		"Compiler": runtime.Compiler,
+	})
+}

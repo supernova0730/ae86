@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS order_item;
+
+DROP TABLE IF EXISTS orders;
+
+DROP TYPE IF EXISTS order_state;
+
+DROP TYPE IF EXISTS order_payment_method;
+
+DROP TABLE IF EXISTS customer;
+
+DROP TABLE IF EXISTS product;
+
+DROP TABLE IF EXISTS category;
+
+DROP TABLE IF EXISTS store;
+
+DROP TABLE IF EXISTS manager;
