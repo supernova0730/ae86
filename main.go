@@ -1,6 +1,7 @@
 package main
 
 import (
+	"ae86/cmd/app"
 	"ae86/pkg/banner"
 	"runtime"
 	"time"
@@ -12,7 +13,7 @@ const bannerTemplate = `
 {{ .ansiColor.Red }} ███████║█████╗  ╚█████╔╝███████╗  {{ .ansiColor.Green }} GOOS:     {{ .ansiColor.Blue }} {{ .GOOS }}
 {{ .ansiColor.Red }} ██╔══██║██╔══╝  ██╔══██╗██╔═══██╗ {{ .ansiColor.Green }} GOARCH:   {{ .ansiColor.Blue }} {{ .GOARCH }}
 {{ .ansiColor.Red }} ██║  ██║███████╗╚█████╔╝╚██████╔╝ {{ .ansiColor.Green }} Compiler: {{ .ansiColor.Blue }} {{ .Compiler }}
-{{ .ansiColor.Red }} ╚═╝  ╚═╝╚══════╝ ╚════╝  ╚═════╝ 
+{{ .ansiColor.Red }} ╚═╝  ╚═╝╚══════╝ ╚════╝  ╚═════╝  {{ .ansiColor.Default }}
 `
 
 func main() {
@@ -23,4 +24,6 @@ func main() {
 		"GOARCH":   runtime.GOARCH,
 		"Compiler": runtime.Compiler,
 	})
+
+	app.Start()
 }
