@@ -1,6 +1,7 @@
 package app
 
 import (
+	"ae86/internal/app"
 	"github.com/urfave/cli/v2"
 )
 
@@ -12,6 +13,7 @@ var startCmd = &cli.Command{
 	},
 	Before: loadConfig,
 	Action: func(c *cli.Context) error {
-		return nil
+		config := getConfigFrom(c.Context)
+		return app.Run(config)
 	},
 }
