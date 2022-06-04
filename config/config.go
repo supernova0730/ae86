@@ -26,8 +26,11 @@ type Database struct {
 
 // HTTP - http server config storage
 type HTTP struct {
-	Host string
-	Port string
+	Host      string
+	Port      string
+	TLSEnable bool
+	CertFile  string
+	KeyFile   string
 }
 
 // Get - read config and return as Config struct
@@ -49,8 +52,11 @@ func Get(configPath, envPrefix string) (Config, error) {
 			SSLMode:  viper.GetString("db.sslmode"),
 		},
 		HTTP: HTTP{
-			Host: viper.GetString("http.host"),
-			Port: viper.GetString("http.port"),
+			Host:      viper.GetString("http.host"),
+			Port:      viper.GetString("http.port"),
+			TLSEnable: viper.GetBool("http.tls_enable"),
+			CertFile:  viper.GetString("http.cert_file"),
+			KeyFile:   viper.GetString("http.key_file"),
 		},
 	}
 
@@ -95,6 +101,9 @@ func setDefaults() {
 	viper.SetDefault("db.sslmode", "disable")
 	viper.SetDefault("http.host", "localhost")
 	viper.SetDefault("http.port", "8000")
+	viper.SetDefault("http.tls_enable", false)
+	viper.SetDefault("http.cert_file", "")
+	viper.SetDefault("http.key_file", "")
 }
 
 // createConfigFile - creates config file
