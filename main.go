@@ -3,6 +3,7 @@ package main
 import (
 	"ae86/cmd/app"
 	"ae86/pkg/banner"
+	"ae86/pkg/logger"
 	"runtime"
 	"time"
 )
@@ -25,5 +26,6 @@ func main() {
 		"Compiler": runtime.Compiler,
 	})
 
-	app.Start()
+	logger.Init()
+	app.Run()
 }

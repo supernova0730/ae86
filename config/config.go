@@ -1,7 +1,10 @@
 package config
 
 import (
+	"fmt"
 	"github.com/spf13/viper"
+	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -57,7 +60,18 @@ func Get(configPath, envPrefix string) (Config, error) {
 // GenerateDefault - creates config file with default config values
 func GenerateDefault(configPath string) error {
 	setDefaults()
-	return viper.WriteConfigAs(configPath)
+
+	err := createConfigFile(configPath)
+	if err != nil {
+		return fmt.Errorf("create config failed: %v", err)
+	}
+
+	err = viper.WriteConfigAs(configPath)
+	if err != nil {
+		return fmt.Errorf("write to config file is failed: %v", err)
+	}
+
+	return nil
 }
 
 // read - reads config from file and environment
@@ -81,4 +95,25 @@ func setDefaults() {
 	viper.SetDefault("db.sslmode", "disable")
 	viper.SetDefault("http.host", "localhost")
 	viper.SetDefault("http.port", "8000")
+}
+
+// createConfigFile - creates config file
+// if the file already doesn't exist, file will be created,
+// otherwise file will be rewritten
+func createConfigFile(configPath string) error {
+	dir := filepath.Dir(configPath)
+	_, err := os.Stat(dir)
+	if os.IsNotExist(err) {
+		err = os.Mkdir(dir, 0775)
+		if err != nil {
+			return fmt.Errorf("create dir failed: %v", err)
+		}
+	}
+
+	_, err = os.Create(configPath)
+	if err != nil {
+		return fmt.Errorf("create file failed: %v", err)
+	}
+
+	return nil
 }
