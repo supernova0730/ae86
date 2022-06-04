@@ -1,10 +1,10 @@
 package model
 
-import "time"
+import (
+	"gorm.io/gorm"
+)
 
 type Model struct {
-	ID        int64     `gorm:"column:id"`
-	IsDeleted bool      `gorm:"column:is_deleted"`
-	CreatedAt time.Time `gorm:"column:created_at"`
-	UpdatedAt time.Time `gorm:"column:updated_at"`
+	gorm.Model
+	IsDeleted bool `gorm:"column:is_deleted;not null;default:false"`
 }

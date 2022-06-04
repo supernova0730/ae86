@@ -13,6 +13,7 @@ func Run() {
 		Commands: []*cli.Command{
 			configCmd,
 			startCmd,
+			migrateCmd,
 		},
 	}
 	if err := root.Run(os.Args); err != nil {
