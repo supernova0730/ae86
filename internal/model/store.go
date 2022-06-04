@@ -14,7 +14,7 @@ type Store struct {
 	MinOrderPrice    int           `gorm:"column:min_order_price;check:min_order_price > 0;not null"`
 	DeliveryPrice    int           `gorm:"column:delivery_price;check:delivery_price > 0;not null"`
 	ContactPhone     string        `gorm:"column:contact_phone;not null"`
-	ManagerID        int64         `gorm:"column:manager_id"`
+	ManagerID        uint          `gorm:"column:manager_id"`
 
 	Manager *Manager
 }

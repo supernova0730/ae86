@@ -7,7 +7,7 @@ type Product struct {
 	Price       int    `gorm:"column:price;not null;check:price > 0"`
 	Image       string `gorm:"column:image;not null"`
 	IsActive    bool   `gorm:"column:is_active;not null;default:true"`
-	CategoryID  int64  `gorm:"column:category_id"`
+	CategoryID  uint   `gorm:"column:category_id"`
 
 	Category *Category
 }
