@@ -22,3 +22,8 @@ type Store struct {
 func (Store) TableName() string {
 	return "store"
 }
+
+func (s Store) IsOpen() bool {
+	n := time.Now()
+	return s.WorkingHourBegin.Before(n) && s.WorkingHourEnd.After(n)
+}
