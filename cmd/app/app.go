@@ -5,14 +5,11 @@ import (
 	"ae86/consts"
 	"ae86/pkg/logger"
 	"flag"
-	"os"
-	"path/filepath"
 )
 
 func Start() {
 	logger.Init()
 
-	// todo: generate default config
 	configPath, err := getConfigPath()
 	if err != nil {
 		logger.Log.Fatal(err)
@@ -35,10 +32,5 @@ func getConfigPath() (string, error) {
 		return *configPath, nil
 	}
 
-	return defaultConfigPath(), nil
-}
-
-func defaultConfigPath() string {
-	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".ae86/config.yaml")
+	return consts.DefaultConfigPath(), nil
 }

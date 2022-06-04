@@ -29,6 +29,8 @@ type HTTP struct {
 
 // Get - read config and return as Config struct
 func Get(configPath, envPrefix string) (Config, error) {
+	setDefaults()
+
 	err := read(configPath, envPrefix)
 	if err != nil {
 		return Config{}, err
@@ -52,6 +54,12 @@ func Get(configPath, envPrefix string) (Config, error) {
 	return conf, nil
 }
 
+// GenerateDefault - creates config file with default config values
+func GenerateDefault(configPath string) error {
+	setDefaults()
+	return viper.WriteConfigAs(configPath)
+}
+
 // read - reads config from file and environment
 // configPath - filepath to config file
 // envPrefix - application specific environment prefix
@@ -61,4 +69,16 @@ func read(configPath, envPrefix string) error {
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	viper.SetEnvPrefix(envPrefix)
 	return viper.ReadInConfig()
+}
+
+// setDefaults - set default values to viper
+func setDefaults() {
+	viper.SetDefault("db.username", "postgres")
+	viper.SetDefault("db.password", "")
+	viper.SetDefault("db.host", "localhost")
+	viper.SetDefault("db.port", "5432")
+	viper.SetDefault("db.database", "database")
+	viper.SetDefault("db.sslmode", "disable")
+	viper.SetDefault("http.host", "localhost")
+	viper.SetDefault("http.port", "8000")
 }
