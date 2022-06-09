@@ -49,6 +49,12 @@ type CustomerStorage interface {
 	Create(customer model.Customer) (id uint, err error)
 }
 
-type OrderStorage interface{}
+type OrderStorage interface {
+	GetByID(id uint) (result model.Order, err error)
+	GetAllBy(filter OrderFilter) (result []model.Order, err error)
+	Create(order model.Order) (id uint, err error)
+	Update(id uint, order model.Order) (err error)
+	Delete(id uint) (err error)
+}
 
 type OrderItemStorage interface{}
