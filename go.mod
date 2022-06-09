@@ -3,6 +3,7 @@ module ae86
 go 1.17
 
 require (
+	github.com/gofiber/fiber/v2 v2.34.0
 	github.com/mattn/go-isatty v0.0.14
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/viper v1.12.0
@@ -15,7 +16,6 @@ require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
-	github.com/gofiber/fiber/v2 v2.34.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.12.1 // indirect
