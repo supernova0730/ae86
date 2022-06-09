@@ -27,9 +27,21 @@ type StoreStorage interface {
 	Delete(id uint) (err error)
 }
 
-type CategoryStorage interface{}
+type CategoryStorage interface {
+	GetByID(id uint) (result model.Category, err error)
+	GetAllByStoreID(storeID uint) (result []model.Category, err error)
+	Create(category model.Category) (id uint, err error)
+	Update(id uint, category model.Category) (err error)
+	Delete(id uint) (err error)
+}
 
-type ProductStorage interface{}
+type ProductStorage interface {
+	GetByID(id uint) (result model.Product, err error)
+	GetAllBy(filter ProductFilter) (result []model.Product, err error)
+	Create(product model.Product) (id uint, err error)
+	Update(id uint, product model.Product) (err error)
+	Delete(id uint) (err error)
+}
 
 type CustomerStorage interface{}
 
