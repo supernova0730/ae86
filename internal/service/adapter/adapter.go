@@ -57,4 +57,10 @@ type OrderStorage interface {
 	Delete(id uint) (err error)
 }
 
-type OrderItemStorage interface{}
+type OrderItemStorage interface {
+	GetByID(id uint) (result model.OrderItem, err error)
+	GetAllByOrderID(orderID uint) (result []model.OrderItem, err error)
+	Create(orderItem model.OrderItem) (id uint, err error)
+	Update(id uint, orderItem model.OrderItem) (err error)
+	Delete(id uint) (err error)
+}
