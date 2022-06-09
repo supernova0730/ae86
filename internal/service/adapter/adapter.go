@@ -43,7 +43,11 @@ type ProductStorage interface {
 	Delete(id uint) (err error)
 }
 
-type CustomerStorage interface{}
+type CustomerStorage interface {
+	GetByID(id uint) (result model.Customer, err error)
+	GetByExternalID(externalID uint) (result model.Customer, err error)
+	Create(customer model.Customer) (id uint, err error)
+}
 
 type OrderStorage interface{}
 
