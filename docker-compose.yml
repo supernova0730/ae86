@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    hostname: db
+    networks:
+      - mynet
+    environment:
+      - POSTGRES_DB=jyldam
+      - POSTGRES_PASSWORD=000730
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  ae86:
+    depends_on:
+      db:
+        condition: service_healthy
+    build:
+      context: .
+    container_name: ae86
+    hostname: ae86
+    networks:
+      - mynet
+    ports:
+      - "80:8000"
+    environment:
+      - AE86_DB_HOST=db
+      - AE86_DB_DATABASE=jyldam
+      - AE86_DB_PASSWORD=000730
+      - AE86_HTTP_HOST=0.0.0.0
+
+
+networks:
+  mynet:
+    driver: bridge
